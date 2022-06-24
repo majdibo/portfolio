@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -15,7 +16,8 @@ import { HeaderComponent } from './header/header.component';
     CommonModule,
     RouterModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   exports : [
     HeaderComponent

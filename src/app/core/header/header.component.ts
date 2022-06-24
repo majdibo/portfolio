@@ -7,7 +7,7 @@ import {HeaderService} from '../services/header.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   bio$ = this.bioService.getBio();
   isHome$ = this.headerservice.isHome();
@@ -19,8 +19,5 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(private headerservice: HeaderService, private bioService: BioService) { }
-
-  ngOnInit(): void {
-  }
 
 }
