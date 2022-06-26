@@ -16,10 +16,14 @@ export class ProjectsService {
     let projects$: Observable<Project[]>;
     projects$ = this.http.get<Project[]>('assets/json/projects.json');
 
-    return projects$.pipe(
-      mergeAll(),
-      filter(project => (featured && project.featured) || false),
-      toArray()
-    );
+    if (featured) {
+      return projects$.pipe(
+        mergeAll(),
+        filter(project => (featured && project.featured) || false),
+        toArray()
+      );
+    }
+
+    return projects$;
   }
 }

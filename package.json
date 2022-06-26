@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "scully": "npx scully --",
+    "scully": "npx scully",
     "scully:serve": "npx scully serve --"
   },
   "private": true,
