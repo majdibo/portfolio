@@ -13,3 +13,7 @@
   text-overflow: ellipsis;
   max-width: 20ch;
 }
+
+.card-subtitle i{
+  padding-left: 0.5em
+}

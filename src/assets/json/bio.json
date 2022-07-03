@@ -2,11 +2,18 @@
   "firstName": "Majdi",
   "lastName": "Ben Ouaghrem",
   "intro": [
-    "I'm a software developer with a passion for web development. I am currently based somewhere in the world. My main focus is building fast, accessible, and beautiful websites that users enjoy.",
+    "As a Software Engineer I am trained and experienced for designing, constructing, testing and maintaining required software systems. My main focus is building fast, accessible, and beautiful apps that resolve problems and users enjoy.",
     "You can have a look at some of my work here."
   ],
   "about": [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam auctor fringilla. Proin scelerisque lacinia nisl vel ultrices. Ut gravida finibus velit sit amet pulvinar. Nunc nisi arcu, pretium quis ultrices nec, volutpat sit amet nulla. Mauris semper elementum placerat. Aenean velit risus, aliquet quis lectus id, laoreet accumsan erat. Curabitur varius facilisis velit, et rutrum ligula mollis et. Sed imperdiet sit amet urna ut eleifend. Suspendisse consectetur velit nunc, at fermentum eros volutpat nec. Vivamus scelerisque nec turpis volutpat sagittis. Aenean eu sem et diam consequat euismod.",
-    "Mauris dolor tellus, sagittis vel pellentesque sit amet, viverra in enim. Maecenas non lectus eget augue convallis iaculis mattis malesuada nisl. Suspendisse malesuada purus et luctus scelerisque. Cras hendrerit, eros malesuada blandit scelerisque, nulla dui gravida arcu, nec maximus nunc felis sit amet mauris. Donec lorem elit, feugiat sit amet condimentum quis, consequat id diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras rutrum sodales condimentum. Aenean ultrices mi vel augue dapibus mattis. Donec ut ornare nisl. Curabitur feugiat pharetra dictum."
+    "I work with :",
+    "→ ☕️ Java platforms : Java, Kotlin, SpringBoot, Spring (Data, MVC, Integration, Security, Cloud, etc) ",
+    "→ \uD83C\uDF10 Microservices : Spring Cloud, Netflix (discovery, gateway), Keycloak (security), RabbitMQ(Message Broker), ngix (api proxy), OpenApi,",
+    "→ \uD83D\uDEA6 Testing : Cucumber, JUnit",
+    "→ \uD83C\uDF0D BigData : Apache Spark, HDFS",
+    "→ \uD83D\uDCBD Database : SQL (PostgreSQL, Teradata) NoSql (Hbase)",
+    "→ \uD83D\uDCF1 Frontend : Angular, Typescript, Javascript ",
+    "→ \uD83C\uDFAF Devops : Jenkins, Gitlab, Docker, Swarm, kubernetes",
+    "→ ✂️ Craft : DDD, TDD, Refactoring patterns, SOLID principales, Microservice patterns, microfrontend, Api first design, Api management Hexagonal architecture"
   ]
 }

@@ -11,8 +11,7 @@
           {{project.name}}
         </h5>
         <h6 class="card-subtitle mb-2 font-weight-lighter text-left">
-          <i [ngClass]="project.stack.iconClasses"></i>
-          {{project.stack.name}}
+          <i *ngFor="let stack of project.stack" [ngClass]= "stack.iconClasses" [ngbTooltip]="stack.name"></i>
         </h6>
         <p class="card-text text-left">
           {{project.description}}

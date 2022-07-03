@@ -5,6 +5,7 @@ import { PortfolioRoutingModule } from './portfolio-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -13,9 +14,10 @@ import { ProjectsComponent } from './projects/projects.component';
     AboutComponent,
     ProjectsComponent
   ],
-  imports: [
-    CommonModule,
-    PortfolioRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        PortfolioRoutingModule,
+        NgbModule
+    ]
 })
 export class PortfolioModule { }
