@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ProjectsService} from '../../core/services/projects.service';
 import {HeaderService} from '../../core/services/header.service';
 import {mergeMap} from 'rxjs/operators';

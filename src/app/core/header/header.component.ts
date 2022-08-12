@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {BioService} from '../services/bio.service';
 import {HeaderService} from '../services/header.service';
 
@@ -10,7 +10,7 @@ import {HeaderService} from '../services/header.service';
 export class HeaderComponent {
 
   bio$ = this.bioService.getBio();
-  isHome$ = this.headerservice.isHome();
+  isHome$ = this.headerService.isHome();
 
   menuItems = [
     { title: 'About Me', homePath: '/', fragment: 'about', pagePath: '/about' },
@@ -18,7 +18,7 @@ export class HeaderComponent {
     { title: 'My Blog', homePath: '/blog', fragment: '', pagePath: '/blog' , fullPath: true}
   ];
 
-  constructor(private headerservice: HeaderService, private bioService: BioService) { }
+  constructor(private headerService: HeaderService, private bioService: BioService) { }
 
   handleUrl(url: string, fullPath: boolean): void {
    if (fullPath) { window.location.href = url; }
