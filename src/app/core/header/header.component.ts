@@ -15,9 +15,12 @@ export class HeaderComponent {
   menuItems = [
     { title: 'About Me', homePath: '/', fragment: 'about', pagePath: '/about' },
     { title: 'My Projects', homePath: '/', fragment: 'projects', pagePath: '/projects' },
-    { title: 'My Blog', homePath: '/blog', fragment: '', pagePath: '/blog' }
+    { title: 'My Blog', homePath: '/blog', fragment: '', pagePath: '/blog' , fullPath: true}
   ];
 
   constructor(private headerservice: HeaderService, private bioService: BioService) { }
 
+  handleUrl(url: string, fullPath: boolean): void {
+   if (fullPath) { window.location.href = url; }
+  }
 }

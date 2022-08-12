@@ -6,6 +6,7 @@
   </div>
   <div class="d-none d-md-flex flex-grow-1 justify-content-end align-items-start">
     <button *ngFor="let item of menuItems" [fragment]="(isHome$ | async) ? item.fragment : ''"
+            (click)="handleUrl(item.pagePath, item.fullPath)"
             [routerLink]="(isHome$ | async) ? item.homePath : item.pagePath" class="ml-2 mr-2 btn btn-outline-dark border-0 font-weight-bold"
             type="button">{{item.title}}</button>
   </div>
@@ -16,6 +17,7 @@
       </button>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
         <button ngbDropdownItem *ngFor="let item of menuItems"
+                (click)="handleUrl(item.pagePath, item.fullPath)"
                 [routerLink]="(isHome$ | async) ? item.homePath : item.pagePath"
                 [fragment]="(isHome$ | async) ? item.fragment : ''">{{item.title}}</button>
       </div>
