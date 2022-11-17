@@ -1,0 +1,12 @@
+.external-link a img {
+  height: 5rem;
+  width: 5rem;
+}
+
+.external-link-container{
+  flex: auto;
+  display: flex;
+  width: inherit;
+  align-items: center;
+  justify-content: space-evenly;
+}

@@ -7,7 +7,7 @@
   ],
   "about": [
     "I work with :",
-    "→ ☕️ Java platforms : Java, Kotlin, SpringBoot, Spring (Data, MVC, Integration, Security, Cloud, etc) ",
+    "→ ☕️ Java platforms : @Java, Kotlin, SpringBoot, Spring (Data, MVC, Integration, Security, Cloud, etc) ",
     "→ \uD83C\uDF10 Microservices : Spring Cloud, Netflix (discovery, gateway), Keycloak (security), RabbitMQ(Message Broker), ngix (api proxy), OpenApi,",
     "→ \uD83D\uDEA6 Testing : Cucumber, JUnit",
     "→ \uD83C\uDF0D BigData : Apache Spark, HDFS",
@@ -15,5 +15,32 @@
     "→ \uD83D\uDCF1 Frontend : Angular, Typescript, Javascript ",
     "→ \uD83C\uDFAF Devops : Jenkins, Gitlab, Docker, Swarm, kubernetes",
     "→ ✂️ Craft : DDD, TDD, Refactoring patterns, SOLID principales, Microservice patterns, microfrontend, Api first design, Api management Hexagonal architecture"
+  ],
+  "externalLinks": [
+    {
+      "name": "linkedin",
+      "link": "https://www.linkedin.com/in/majdibo",
+      "logo": "/assets/images/linkedin-icon.svg"
+    },
+    {
+      "name": "twitter",
+      "link": "https://twitter.com/majdibo_",
+      "logo": "/assets/images/twitter-icon.svg"
+    },
+    {
+      "name": "github",
+      "link": "https://github.com/majdibo",
+      "logo": "/assets/images/github-icon.svg"
+    },
+    {
+      "name": "stackoverflow",
+      "link": "https://stackoverflow.com/users/3802693/majdibo",
+      "logo": "/assets/images/stackoverflow-icon.svg"
+    },
+    {
+      "name": "gmail",
+      "link": "mailto:majdi.ben.ouaghrem@gmail.com",
+      "logo": "/assets/images/gmail-icon.svg"
+    }
   ]
 }

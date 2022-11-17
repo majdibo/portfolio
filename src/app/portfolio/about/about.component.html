@@ -6,5 +6,12 @@
       <h4 *ngIf="!options.useSmallerHeadings" class="mb-4">{{par}}</h4>
       <h5 *ngIf="options.useSmallerHeadings" class="mb-4">{{par}}</h5>
     </div>
+
+    <div>You can find me on</div>
+    <div class="external-link-container">
+      <div class="external-link" *ngFor="let e of bio.externalLinks">
+        <a [href]="e.link" [name]="e.name"><img [src]="e.logo" [alt]="e.name"></a>
+      </div>
+    </div>
   </div>
 </div>
