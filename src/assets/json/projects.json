@@ -15,5 +15,31 @@
     "sourceUrl": "https://github.com/majdibo/workman",
     "previewUrl": "https://github.com/majdibo/workman",
     "featured": true
+  },
+  {
+    "name": "portfolio",
+    "stack": [
+      {
+        "name": "Angular",
+        "iconClasses": "fab fa-angular"
+      },
+      {
+        "name": "TypeScript",
+        "iconClasses": "fab fa-js"
+      },
+      {
+        "name": "Html",
+        "iconClasses": "fab fa-html5"
+      },
+      {
+        "name": "CSS",
+        "iconClasses": "fab fa-css3"
+      }
+    ],
+    "description": "The source code of this web site",
+    "sourceUrl": "https://github.com/majdibo/portfolio",
+    "previewUrl": "https://majdibo.com",
+    "featured": true
   }
+
 ]
