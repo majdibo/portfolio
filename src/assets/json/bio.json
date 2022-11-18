@@ -2,19 +2,97 @@
   "firstName": "Majdi",
   "lastName": "Ben Ouaghrem",
   "intro": [
-    "As a Software Engineer I am trained and experienced for designing, constructing, testing and maintaining required software systems. My main focus is building fast, accessible, and beautiful apps that resolve problems and users enjoy.",
-    "You can have a look at some of my work here."
+    "As a Software Engineer I am trained and experienced in designing, constructing, testing and supporting systems. My main focus is building fast, accessible, and engaging apps that resolve problems and users enjoy.",
+    "",
+    "You can have a look at some of my work here"
+  ],
+  "skills": [
+    {
+      "category": "Java plateforms",
+      "icon": "☕",
+      "technics": [
+        "@Java",
+        "Kotlin",
+        "Spring Boot",
+        "Spring"
+      ]
+    },
+    {
+      "category": "Microservices",
+      "icon": "\uD83C\uDF10",
+      "technics": [
+        "Spring Cloud",
+        "Keycloak",
+        "RabbitMQ",
+        "Ngix",
+        "OpenApi"
+      ]
+    },
+    {
+      "category": "Testing",
+      "icon": "\uD83D\uDEA6",
+      "technics": [
+        "Cucumber",
+        "JUnit"
+      ]
+    },
+    {
+      "category": "BigData",
+      "icon": "\uD83C\uDF0D",
+      "technics": [
+        "Spark",
+        "MapReduce",
+        "HDFS"
+      ]
+    },
+    {
+      "category": "Database",
+      "icon": "\uD83D\uDCBD",
+      "technics": [
+        "PostgreSQL",
+        "Teradata",
+        "Hbase"
+      ]
+    },
+    {
+      "category": "Frontend",
+      "icon": "\uD83D\uDCF1",
+      "technics": [
+        "Angular",
+        "Typescript",
+        "Javascript"
+      ]
+    },
+    {
+      "category": "Devops",
+      "icon": "\uD83C\uDFAF",
+      "technics": [
+        "Jenkins",
+        "Gitlab",
+        "Docker",
+        "Swarm",
+        "Kubernetes"
+      ]
+    },
+    {
+      "category": "Craft",
+      "icon": "✂",
+      "technics": [
+        "DDD",
+        "TDD",
+        "Refactoring",
+        "SOLID",
+        " Microservice",
+        "Microfrontend",
+        "API First",
+        "API Management",
+        "Hexagonal Arch",
+        "Clean Code"
+      ]
+    }
   ],
   "about": [
-    "I work with :",
-    "→ ☕️ Java platforms : @Java, Kotlin, SpringBoot, Spring (Data, MVC, Integration, Security, Cloud, etc) ",
-    "→ \uD83C\uDF10 Microservices : Spring Cloud, Netflix (discovery, gateway), Keycloak (security), RabbitMQ(Message Broker), ngix (api proxy), OpenApi,",
-    "→ \uD83D\uDEA6 Testing : Cucumber, JUnit",
-    "→ \uD83C\uDF0D BigData : Apache Spark, HDFS",
-    "→ \uD83D\uDCBD Database : SQL (PostgreSQL, Teradata) NoSql (Hbase)",
-    "→ \uD83D\uDCF1 Frontend : Angular, Typescript, Javascript ",
-    "→ \uD83C\uDFAF Devops : Jenkins, Gitlab, Docker, Swarm, kubernetes",
-    "→ ✂️ Craft : DDD, TDD, Refactoring patterns, SOLID principales, Microservice patterns, microfrontend, Api first design, Api management Hexagonal architecture"
+    "I work with :"
   ],
   "externalLinks": [
     {

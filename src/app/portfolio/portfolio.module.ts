@@ -6,18 +6,22 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SharedModule} from '../shared/shared.module';
+import { TechnicComponent } from './about/tag/technic.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     AboutComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    TechnicComponent
   ],
     imports: [
         CommonModule,
         PortfolioRoutingModule,
-        NgbModule
+        NgbModule,
+        SharedModule
     ]
 })
 export class PortfolioModule { }
