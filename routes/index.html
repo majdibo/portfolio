@@ -1,0 +1,160 @@
+{{layout default}}
+<section class="hero centered fullscreen">
+    <header></header>
+    <main>
+        <div>
+            <h1>Hello 👋 , I'm Majdi <span class="light">Ben Ouaghrem</span>.</h1>
+            <span class="divider accent"><i class="fa-regular fa-circle"></i></span>
+            <h2 class="flex center wrap align-center">
+                <span>Crafting</span>
+                <span class="animation fast fg-default m-1">
+              <ul>
+                <li>Innovative</li>
+                <li>Scalable</li>
+                <li>Custom</li>
+                <li>Efficient</li>
+                <li>Dynamic</li>
+              </ul>
+            </span>
+                <span>solutions for</span>
+                <span class="animation slow fg-default m-1">
+              <ul>
+                <li>Businesses</li>
+                <li>the Future</li>
+                <li>Growth</li>
+                <li>Impact</li>
+                <li>Tomorrow</li>
+              </ul>
+            </span>
+                <span>using</span>
+                <span class="animation fg-default ml-1">
+              <ul>
+                <li>AI</li>
+                <li>Data</li>
+                <li>Best Practices</li>
+                <li>Code</li>
+                <li>Cloud</li>
+              </ul>
+            </span>
+            </h2>
+        </div>
+    </main>
+    <footer>
+        <a href="./about">
+            <button>Get in touch</button>
+        </a>
+        <a href="./blog">
+            <button>check the blog</button>
+        </a>
+    </footer>
+
+</section>
+
+<p class="divider mt-4 mb-4"><i class="fa-solid fa-chevron-down"></i></p>
+
+<section class="hero fullscreen">
+    <main>
+        <div>
+            <h1 id="about">About me</h1>
+            <p>I'm <b>Majdi</b>, As a Software Engineer I am trained and experienced in designing, constructing, testing
+                and supporting systems. </p>
+            <p>My main focus is building fast, accessible, and engaging apps that resolve problems and users enjoy.</p>
+            <div class="flex end width">
+                <a href="https://www.linkedin.com/in/majdibo" target="_blank">
+                    <button><i class="fa-brands fa-linkedin-in"></i></button>
+                </a>
+                <a href="https://github.com/majdibo" target="_blank">
+                    <button><i class="fa-brands fa-github"></i></button>
+                </a>
+                <a href="https://x.com//majdibo_" target="_blank">
+                    <button><i class="fa-brands fa-x-twitter"></i></button>
+                </a>
+                <a href="https://stackoverflow.com/users/3802693/majdibo" target="_blank">
+                    <button><i class="fa-brands fa-stack-overflow"></i></button>
+                </a>
+                <a href="mailto:majdi.ben.ouaghrem@gmail.com" target="_blank">
+                    <button><i class="fa-thin fa-at"></i></button>
+                </a>
+            </div>
+
+        </div>
+        <figure class="circle">
+            <img alt="Majdi Profile" src="./assets/img/profile!majdibo.png"/>
+        </figure>
+    </main>
+</section>
+<div class="fullscreen">
+    <h2 class="divider">Background</h2>
+    <section class="flex centered">
+        <section class="col-span-3 card">
+            <h3>Software Engineering MSc.</h3>
+            <small>INSAT, Tunisia</small>
+
+            <p class="m-1.5">
+                I have a strong foundation in advanced software development, system design, and project management. My
+                academic journey at INSAT honed my technical expertise and analytical skills, allowing me to tackle
+                complex
+                software challenges.
+            </p>
+        </section>
+        <section>
+            <span class="vertical divider height smaller accent"><i class="fa-regular fa-circle"></i></span>
+        </section>
+        <section class="col-span-3 card">
+            <h3>Solution Architect</h3>
+            <small>Sanofi</small>
+            <p class="m-1.5">Currently, I am working as a Solution Architect at Sanofi, where I design and implement
+                innovative technology solutions that align with the company's strategic goals. In this role,</p>
+            <p> I collaborate closely with cross-functional teams to translate business requirements into scalable,
+                efficient, and secure systems. </p>
+            <p>My work involves ensuring the seamless integration of various technologies, optimizing performance, and
+                maintaining a focus on sustainability and future growth. This position allows me to leverage my
+                expertise in
+                software engineering while driving impactful solutions in the healthcare industry.
+            </p>
+        </section>
+    </section>
+</div>
+
+<div class="fullscreen">
+    <h2 class="divider">Blogs</h2>
+
+    <section class="scroll horizontal">
+        <article class="clickable">
+            <img src="{{featuredArticle.img}}" alt="{{featuredArticle.title}}">
+            <header>
+                <a href="{{featuredArticle.link}}">{{featuredArticle.title}}</a>
+                <h1> {{featuredArticle.title}}</h1>
+                <p><small class="bg-accent p-.5">architecture</small></p>
+            </header>
+            <p>{{featuredArticle.description}}</p>
+            <footer>
+                <p>{{featuredArticle.readingTime}} min read</p>
+            </footer>
+        </article>
+
+        {{#if articles.length>0}}
+        <div class="flex horizontal">
+
+            {{#each articles}}
+            <article class="clickable">
+                <img src="{{img}}" alt="{{title}}">
+                <header>
+                    <a href="{{link}}">{{title}}</a>
+                    <h1> {{title}}</h1>
+                    <p>
+                        {{#each tags}}
+                        <small class="bg-accent p-.5">{{this}}</small>
+                        {{/each}}
+                    </p>
+                </header>
+                <p>{{description}}</p>
+                <footer>
+                    <p>{{readingTime}}</p>
+                </footer>
+            </article>
+            {{/each}}
+        </div>
+        {{/if}}
+    </section>
+</div>

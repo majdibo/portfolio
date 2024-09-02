@@ -1,0 +1,20 @@
+{{layout default}}
+<h1>{{ title }}</h1>
+
+
+{{#each articles}}
+<article class="horizontal clickable">
+    <img src="{{img}}" alt="{{title}}">
+    <header>
+        <a href="{{link}}">{{title}}</a>
+        <h1> {{title}}</h1>
+        <p><small class="bg-accent p-.5">architecture</small></p>
+    </header>
+    <main>
+    <p>{{description}}</p>
+    </main>
+    <footer>
+        <p>{{readingTime}} min read</p>
+    </footer>
+</article>
+{{/each}}
