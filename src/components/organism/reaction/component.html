@@ -1,0 +1,132 @@
+<div id="reactions" class="reaction-container">
+
+    <h3>React to this article:</h3>
+    <div class="reaction-buttons accent">
+        <label class="reaction-button  tooltip hover">
+            <span class="tooltip-content bottom">Inspiring</span>
+            <input type="radio" name="reaction" value="Inspiring" onclick="selectReaction('Inspiring')">
+            <i>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracurrentColorerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_icurrentColoronCarrier">
+                        <path d="M9.23163 8.61762C7.26389 9.06284 6.28001 9.28545 6.04594 10.0382C5.81186 10.7909 6.4826 11.5753 7.82408 13.1439L8.17113 13.5498C8.55234 13.9955 8.74294 14.2184 8.82869 14.4942C8.91444 14.7699 8.88562 15.0673 8.82799 15.662L8.77552 16.2035C8.5727 18.2965 8.4713 19.343 9.08412 19.8082C9.69694 20.2734 10.6181 19.8492 12.4605 19.0009L12.9372 18.7815C13.4607 18.5404 13.7225 18.4199 14 18.4199C14.2775 18.4199 14.5393 18.5404 15.0628 18.7815L15.5395 19.0009C17.3819 19.8492 18.3031 20.2734 18.9159 19.8082C19.5287 19.343 19.4273 18.2965 19.2245 16.2035M20.1759 13.1439C21.5174 11.5753 22.1881 10.7909 21.9541 10.0382C21.72 9.28545 20.7361 9.06284 18.7684 8.61762L18.2593 8.50244C17.7001 8.37592 17.4205 8.31266 17.196 8.14225C16.9716 7.97183 16.8276 7.71355 16.5396 7.19699L16.2775 6.7267C15.2641 4.9089 14.7575 4 14 4C13.2425 4 12.7359 4.9089 11.7225 6.7267"
+                              stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                        <path d="M2.08887 16C3.20445 15.121 4.68639 14.7971 6.08887 15.1257" stroke="currentColor"
+                              stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M2.08887 10.5C3.08887 10 3.37862 10.0605 4.08887 10" stroke="currentColor"
+                              stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M2 5.60867L2.20816 5.48676C4.41383 4.19506 6.75032 3.84687 8.95304 4.48161L9.16092 4.54152"
+                              stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                    </g>
+                </svg>
+            </i><span id="count-inspiring">0</span>
+        </label>
+        <label class="reaction-button  tooltip hover">
+            <span class="tooltip-content bottom">Insightful</span>
+            <input type="radio" name="reaction" value="Insightful" onclick="selectReaction('Insightful')">
+            <i>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M13.3057 18.2975L8.23724 19.987C5.47183 20.9088 4.08912 21.3697 3.35924 20.6398C2.62936 19.9099 3.09026 18.5272 4.01207 15.7618L5.70156 10.6933C6.46758 8.39525 6.85059 7.24623 7.75684 7.03229C8.6631 6.81835 9.51953 7.67478 11.2324 9.38764L14.6114 12.7666C16.3242 14.4795 17.1807 15.3359 16.9667 16.2422"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M12.2351 18.3461C12.2351 18.3461 11.477 16.0649 11.477 14.5552C11.477 13.0454 12.2351 10.7643 12.2351 10.7643M8.06517 19.4833C8.06517 19.4833 7.42484 16.7314 7.307 14.9343C7.11229 11.965 8.06517 7.35254 8.06517 7.35254"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M14.5093 10.0061L14.6533 9.28614C14.7986 8.55924 15.3224 7.96597 16.0256 7.73155C16.7289 7.49714 17.2526 6.90387 17.398 6.17697L17.542 5.45703"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M17.5693 13.2533L17.7822 13.3762C18.4393 13.7556 19.2655 13.6719 19.8332 13.1685C20.3473 12.7126 21.0794 12.597 21.709 12.8723L22.0005 12.9997"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M9.79513 2.77903C9.45764 3.33109 9.54223 4.04247 9.99976 4.5L10.0976 4.59788C10.4908 4.99104 10.6358 5.56862 10.4749 6.10085"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M6.92761 3.94079C7.13708 3.73132 7.47669 3.73132 7.68616 3.94079C7.89563 4.15026 7.89563 4.48988 7.68616 4.69935C7.47669 4.90882 7.13708 4.90882 6.92761 4.69935C6.71814 4.48988 6.71814 4.15026 6.92761 3.94079Z"
+                              fill="currentColor"></path>
+                        <path d="M12.1571 7.1571C12.3666 6.94763 12.7062 6.94763 12.9157 7.1571C13.1251 7.36657 13.1251 7.70619 12.9157 7.91566C12.7062 8.12512 12.3666 8.12512 12.1571 7.91566C11.9476 7.70619 11.9476 7.36657 12.1571 7.1571Z"
+                              fill="currentColor"></path>
+                        <path d="M17.1571 10.1571C17.3666 9.94763 17.7062 9.94763 17.9157 10.1571C18.1251 10.3666 18.1251 10.7062 17.9157 10.9157C17.7062 11.1251 17.3666 11.1251 17.1571 10.9157C16.9476 10.7062 16.9476 10.3666 17.1571 10.1571Z"
+                              fill="currentColor"></path>
+                        <path d="M19.0582 15.3134C19.2677 15.1039 19.6073 15.1039 19.8168 15.3134C20.0262 15.5228 20.0262 15.8624 19.8168 16.0719C19.6073 16.2814 19.2677 16.2814 19.0582 16.0719C18.8488 15.8624 18.8488 15.5228 19.0582 15.3134Z"
+                              fill="currentColor"></path>
+                        <path d="M19.3615 7.71436C18.6912 8.38463 19.1722 10.328 19.1722 10.328C19.1722 10.328 21.1156 10.809 21.7859 10.1387C22.4958 9.42884 22.0941 8.49708 21.0002 8.5C21.0032 7.40615 20.0714 7.00447 19.3615 7.71436Z"
+                              stroke="currentColor" stroke-linejoin="round"></path>
+                        <path d="M15.1884 3.41748L15.1608 3.51459C15.1305 3.62126 15.1153 3.67459 15.1225 3.72695C15.1296 3.77931 15.1583 3.82476 15.2157 3.91567L15.2679 3.99844C15.4698 4.31836 15.5707 4.47831 15.5019 4.60915C15.4332 4.73998 15.2402 4.75504 14.8544 4.78517L14.7546 4.79296C14.6449 4.80152 14.5901 4.8058 14.5422 4.83099C14.4943 4.85618 14.4587 4.89943 14.3875 4.98592L14.3226 5.06467C14.072 5.36905 13.9467 5.52124 13.8038 5.50167C13.6609 5.4821 13.595 5.30373 13.4632 4.94699L13.4291 4.85469C13.3916 4.75332 13.3729 4.70263 13.3361 4.66584C13.2993 4.62905 13.2486 4.61033 13.1472 4.57287L13.0549 4.53878C12.6982 4.40698 12.5198 4.34108 12.5003 4.19815C12.4807 4.05522 12.6329 3.92992 12.9373 3.67932L13.016 3.61448C13.1025 3.54327 13.1458 3.50767 13.1709 3.45974C13.1961 3.41181 13.2004 3.35699 13.209 3.24735L13.2168 3.14753C13.2469 2.76169 13.262 2.56877 13.3928 2.50001C13.5236 2.43124 13.6836 2.53217 14.0035 2.73403L14.0863 2.78626C14.1772 2.84362 14.2226 2.8723 14.275 2.87947C14.3273 2.88664 14.3807 2.87148 14.4873 2.84117L14.5845 2.81358C14.9598 2.70692 15.1475 2.65359 15.2479 2.75402C15.3483 2.85445 15.295 3.04213 15.1884 3.41748Z"
+                              stroke="currentColor"></path>
+                    </g>
+                </svg>
+            </i> <span id="count-insightful">0</span>
+        </label>
+        <label class="reaction-button  tooltip hover">
+            <span class="tooltip-content bottom">Basic</span>
+
+            <input type="radio" name="reaction" value="Basic" onclick="selectReaction('Basic')">
+            <i>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M20 22V16C20 11.5817 16.4183 8 12 8C9.03887 8 6.4535 9.60879 5.07026 12M4 22V16"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M14.2905 11.5C15.2932 11.9059 16.0939 12.7065 16.4998 13.7092" stroke="currentColor"
+                              stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M12 2V5" stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                        <path d="M21 6L19.5 7.5" stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                        <path d="M3 6L4.5 7.5" stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                        <path d="M13.5 17.5C13.5 18.3284 12.8284 19 12 19C11.1716 19 10.5 18.3284 10.5 17.5C10.5 16.6716 11.1716 16 12 16C12.8284 16 13.5 16.6716 13.5 17.5Z"
+                              stroke="currentColor" stroke-width="0.9600000000000002"></path>
+                        <path d="M12 19V22" stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                        <path d="M2 22H14M22 22H18" stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                    </g>
+                </svg>
+            </i><span id="count-basic">0</span>
+        </label>
+        <label class="reaction-button tooltip hover">
+            <span class="tooltip-content bottom">Confusing</span>
+            <input type="radio" name="reaction" value="Confusing" onclick="selectReaction('Confusing')">
+            <i>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     transform="matrix(-1, 0, 0, 1, 0, 0)">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                        <path d="M16.5 20.7361C17.0308 21.2111 17.7316 21.5 18.5 21.5C20.1569 21.5 21.5 20.1569 21.5 18.5C21.5 17.7316 21.2111 17.0308 20.7361 16.5"
+                              stroke="currentColor" stroke-width="0.9600000000000002"></path>
+                        <path d="M7.49951 20.7361C6.96876 21.2111 6.26787 21.5 5.49951 21.5C3.84266 21.5 2.49951 20.1569 2.49951 18.5C2.49951 17.7316 2.78837 17.0308 3.26341 16.5"
+                              stroke="currentColor" stroke-width="0.9600000000000002"></path>
+                        <path d="M12 18V16" stroke="currentColor" stroke-width="0.9600000000000002"
+                              stroke-linecap="round"></path>
+                        <path d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                              stroke="currentColor" stroke-width="0.9600000000000002" stroke-linecap="round"></path>
+                    </g>
+                </svg>
+            </i><span
+                id="count-confusing">0</span>
+        </label>
+        <label class="reaction-button  tooltip hover">
+            <span class="tooltip-content bottom">Misleading</span>
+            <input type="radio" name="reaction" value="Misleading" onclick="selectReaction('Misleading')">
+            <i>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M6.30928 9C8.59494 5 9.96832 3 12 3C14.3107 3 15.7699 5.58716 18.6883 10.7615L19.0519 11.4063C21.4771 15.7061 22.6897 17.856 21.5937 19.428C20.4978 21 17.7864 21 12.3637 21H11.6363C6.21356 21 3.50217 21 2.40626 19.428C1.45498 18.0635 2.24306 16.2635 4.05373 13"
+                              stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+                        <path d="M12 8V13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+                        <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
+                    </g>
+                </svg>
+            </i>
+            <span id="count-misleading">0</span>
+        </label>
+    </div>
+</div>

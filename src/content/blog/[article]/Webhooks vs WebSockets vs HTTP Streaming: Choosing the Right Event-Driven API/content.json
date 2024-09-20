@@ -1,0 +1,5 @@
+{
+  "title": "Webhooks vs WebSockets vs HTTP Streaming: Choosing the Right Event-Driven API",
+  "tags": ["Event Driven Architecture", "Microservices", "Serverless", "webhooks", "websockets", "HTTP Streaming"],
+  "readingTime": "6"
+}
