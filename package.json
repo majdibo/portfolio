@@ -1,7 +1,8 @@
 {
+  "type": "commonjs",
   "scripts": {
-    "build": "node generate.js",
-    "start": "http-server ./output -p 8080"
+    "build": "node generator/main.js",
+    "start": "http-server ./build -p 8080"
   },
   "dependencies": {
     "handlebars": "^4.7.8"
