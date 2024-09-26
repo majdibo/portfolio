@@ -4,7 +4,7 @@ const fs = require("fs");
 const Handlebars = require("handlebars");
 const {copyAssets, readRecursively} = require("./helpers");
 
- class ComponentManager {
+class ComponentManager {
 
     mergeDirectories = ["organism", "molecule", "atom", "template"];
 
@@ -21,8 +21,7 @@ const {copyAssets, readRecursively} = require("./helpers");
     }
 
     registerComponents() {
-
-
+        logger.info("Starting component registration");
 
         const registerComponent = (file => {
             if (file.endsWith('.html')) {
@@ -43,6 +42,7 @@ const {copyAssets, readRecursively} = require("./helpers");
 
                 const content = fs.readFileSync(file, 'utf-8');
                 Handlebars.registerPartial(componentName, content);
+                logger.info(`Registered component: ${componentName}`);
 
                 // Register component CSS and JS
                 const componentDir = path.dirname(file);
@@ -50,13 +50,13 @@ const {copyAssets, readRecursively} = require("./helpers");
                 const componentJsPath = path.join(componentDir, 'component.js');
                 const componentAssetsPath = path.join(componentDir, 'assets');
 
-
                 // Collect CSS
                 if (fs.existsSync(componentCssPath)) {
                     const cssOutputPath = path.join(this.outputDir, 'assets', 'components', componentName, 'component.css');
                     fs.mkdirSync(path.dirname(cssOutputPath), {recursive: true});
                     fs.copyFileSync(componentCssPath, cssOutputPath);
                     this.metadata.css.push({[componentName]: `/assets/components/${componentName}/component.css`});
+                    logger.info(`Collected CSS for component: ${componentName}`);
                 }
 
                 // Collect JavaScript
@@ -65,6 +65,7 @@ const {copyAssets, readRecursively} = require("./helpers");
                     fs.mkdirSync(path.dirname(jsOutputPath), {recursive: true});
                     fs.copyFileSync(componentJsPath, jsOutputPath);
                     this.metadata.js.push({[componentName]: `/assets/components/${componentName}/component.js`});
+                    logger.info(`Collected JavaScript for component: ${componentName}`);
                 }
 
                 // Collect Assets
@@ -73,11 +74,13 @@ const {copyAssets, readRecursively} = require("./helpers");
                     fs.mkdirSync(assetsOutputPath, {recursive: true});
                     copyAssets(componentAssetsPath, assetsOutputPath);
                     this.metadata.assets.push({[componentName]: `/assets/components/${componentName}/assets`});
+                    logger.info(`Collected assets for component: ${componentName}`);
                 }
             }
         });
 
         readRecursively(this.componentDir, registerComponent);
+        logger.info("Completed component registration");
     }
 }
 

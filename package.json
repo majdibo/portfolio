@@ -2,9 +2,14 @@
   "type": "commonjs",
   "scripts": {
     "build": "node generator/main.js",
-    "start": "http-server ./build -p 8080"
+    "start": "http-server ./build -p 8080",
+    "dev": "nodemon  --watch src/ generator/main.js"
   },
+    "devDependencies": {
+        "nodemon": "^3.1.7"
+    },
   "dependencies": {
     "handlebars": "^4.7.8"
-  }
+  },
+  "nodemonConfig": {     "ignore": ["build/**"]   }
 }

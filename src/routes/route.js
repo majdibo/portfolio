@@ -2,7 +2,6 @@ module.exports = {
     getData: async function (parentContext, router) {
         const blog = await router.resolveContentFiles(`${router.contentDir}/blog`, parentContext);
 
-        console.log(blog);
         const articles = blog.articles;
 
         const featuredArticle = articles.filter(article => article.featured)[0];

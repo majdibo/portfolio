@@ -28,7 +28,7 @@ module.exports = {
 
                 if (contentFile) {
                     const htmlContent = fs.readFileSync(path.join(articlePath, contentFile), 'utf8');
-                    const firstParagraphMatch = htmlContent.match(/<p>(.*?)<\/p>/);
+                    const firstParagraphMatch = htmlContent.match(/<p>(.*?)<\/p>/s);
                     const heroImgMatch = htmlContent.match(/<section[^>]*class\s*=\s*["'][^"']*hero[^"']*["'][^>]*>\s*<img\s*src\s*=\s*["']([^"']+)["'][^>]*>/s);
 
                     if (!content.description && firstParagraphMatch) {

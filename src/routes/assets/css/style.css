@@ -61,3 +61,28 @@
 .faq summary, .faq details {
   text-align: left;
 }
+
+
+:root {
+  --comment: var(--color-dark-comment);
+  --function: var(--color-dark-function);
+  --language: var(--color-dark-language);
+  --string: var(--color-dark-string);
+  --keyword: var(--color-dark-keyword);
+  --html: var(--color-dark-html);
+  --section: var(--color-dark-section);
+  --bullet: var(--color-dark-bullet);
+  --color-code-background: var(--color-dark-background);
+  --color-code-text: var(--color-dark-code-text);
+}
+
+pre code {
+  color: var(--color-code-text);
+  background: var(--color-code-background);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}

@@ -1,6 +1,6 @@
 {
     "title": "Event-Driven Architecture: The Future of Scalable Systems Explained",
-    "tags": ["Event Driven Architecture", "Microservices", "Serverless", "Event Sourcing", "CQRS"],
+    "tags": ["EDA", "Microservices", "Serverless", "Event Sourcing", "CQRS"],
     "readingTime": "6",
     "featured": true
 }

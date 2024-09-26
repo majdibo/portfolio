@@ -1,0 +1,236 @@
+<section class="hero main-card">
+    <img src="./assets/img/background.jpg" alt="HTTP Streaming">
+    <main>
+        <div>
+            <h1>Understanding HTTP Streaming: A Practical Guide</h1>
+            <p>HTTP Streaming is a powerful method for delivering real-time updates from server to client. By keeping
+                the connection open, the server can send data as it becomes available. In this guide, we’ll explore how
+                HTTP Streaming works, compare two different techniques (chunked transfer encoding and Server-Sent Events),
+                and walk you through practical implementations of both.</p>
+        </div>
+    </main>
+</section>
+
+<section>
+    <h2>What is HTTP Streaming?</h2>
+    <p>HTTP Streaming is like an open line between the server and the client. Instead of sending a complete response and
+        closing the connection, the server sends data continuously over an open connection. This allows the client to receive
+        updates as soon as they are available, without polling the server repeatedly.</p>
+    <p>Think of it as being on a phone call where the server talks whenever there’s something new to share, and the
+        connection stays alive until one side hangs up.</p>
+</section>
+
+<section>
+    <h2>How HTTP Streaming Works</h2>
+    <p>In a traditional HTTP request-response cycle, the client sends a request and the server responds with the full
+        message before closing the connection. With HTTP Streaming, however, the server sends the response incrementally
+        over time while keeping the connection open. This method enables real-time updates from the server to the client.</p>
+
+    <h3>Chunked Transfer Encoding</h3>
+    <p>One way to achieve HTTP Streaming is by using "chunked transfer encoding." With this technique, the server sends
+        data in chunks without needing to know the full size of the response in advance. Each chunk is transmitted as soon as
+        it’s ready, allowing real-time updates without introducing latency.</p>
+    <figure class="p-1"><img src="./assets/img/Chunked-Encoding.svg" alt="Sequence of chunked encoding http request"></figure>
+
+    <h3>Server-Sent Events (SSE)</h3>
+    <p>Another method, called "Server-Sent Events" (SSE), is a higher-level protocol specifically designed for streaming
+        events from the server to the client. SSE allows the server to send updates in a structured format (text/event-stream)
+        over a persistent connection. It is widely used for real-time notifications, logs, and other one-way communication
+        where the server continuously pushes data to the client.</p>
+    <figure class="p-1"><img src="./assets/img/Server-Sent-Event.svg" alt="Sequence of Server sent event http request"></figure>
+
+</section>
+
+<section>
+    <h2>Practical Guide: Implementing HTTP Streaming</h2>
+    <p>Let’s walk through two examples: one using Server-Sent Events (SSE) and another using chunked transfer encoding to stream log updates to the client. Each example will show you how to set up the server and client for real-time updates.</p>
+
+    <h3>Using Chunked Transfer Encoding</h3>
+    <p>Now, let’s create a server that streams log entries to the client using chunked transfer encoding:</p>
+
+    <h4>Create a new project directory and initialize it:</h4>
+    {{#>code-snippet lang="bash"}}
+    mkdir chunked-example
+    cd chunked-example
+    npm init -y
+    {{/code-snippet}}
+
+    <h4>Install the required dependencies:</h4>
+    {{#>code-snippet lang="bash"}}
+    npm install express
+    {{/code-snippet}}
+
+    <h4>Create the server script (`server.js`):</h4>
+    {{#>code-snippet lang="javascript"}}
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');  // Allow cross-origin for this demo
+    next();
+});
+
+// Endpoint to stream logs using chunked transfer encoding
+app.get('/stream', (req, res) => {
+    res.setHeader('Content-Type', 'text/plain, charset=UTF-8');
+    res.setHeader('Transfer-Encoding', 'chunked');
+
+    const sendLog = (counter) => {
+        res.write(`Log entry ${counter}\n`);
+        if (counter < 10) {
+            setTimeout(() => sendLog(counter + 1), 500);
+        } else {
+            res.end();
+        }
+    };
+    sendLog(1);
+});
+
+app.listen(3000, () => {
+    console.log('Chunked transfer encoding server listening on http://localhost:3000/stream');
+});
+{{/code-snippet}}
+
+    <h4>Run the server:</h4>
+    {{#>code-snippet lang="bash"}}
+node server.js
+    {{/code-snippet}}
+
+    <h3>Client-side Implementation</h3>
+    <p>Next, create an HTML page to connect to the server and display the log updates as they stream in using chunked transfer encoding:</p>
+
+    {{#>code-snippet lang="html"}}
+&lt;h1&gt;Log Updates (Chunked Transfer Encoding)&lt;/h1&gt;
+&lt;pre id='log'&gt;&lt;/pre&gt;
+&lt;script&gt;
+fetch("http://localhost:3000/stream")
+    .then(response => {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        function readStream() {
+            return reader.read().then(({done, value}) => {
+                if (done) return;
+                const logData = decoder.decode(value);
+                document.getElementById("log").textContent += logData;
+                return readStream();
+            });
+        }
+        return readStream();
+    })
+    .catch(error => console.error("Stream error:", error));
+&lt;/script&gt;
+    {{/code-snippet}}
+
+    <p>This script fetches the log stream from the server and displays it in real time, appending each chunk of data as it arrives.</p>
+
+    <h3>Using Server-Sent Events (SSE)</h3>
+    <p>We’ll use Node.js to create a simple server that streams log entries to the client using Server-Sent Events:</p>
+
+    <h4>Create a new project directory and initialize it:</h4>
+    {{#>code-snippet lang="bash"}}
+mkdir sse-example
+cd sse-example
+npm init -y
+    {{/code-snippet}}
+
+    <h4>Install the required dependencies:</h4>
+    {{#>code-snippet lang="bash"}}
+npm install express
+    {{/code-snippet}}
+
+    <h4>Create the server script (`server.js`):</h4>
+    {{#>code-snippet lang="javascript"}}
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');  // Allow cross-origin for this demo
+    next();
+});
+
+// Endpoint to stream logs using Server-Sent Events (SSE)
+app.get('/events', (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    const sendLog = (counter) => {
+        res.write(`data: Log entry ${counter}\n\n`);
+        if (counter < 10) {
+            setTimeout(() => sendLog(counter + 1), 500);
+        } else {
+            res.end();
+        }
+    };
+    sendLog(1);
+});
+
+app.listen(3000, () => {
+    console.log('SSE server listening on http://localhost:3000/events');
+});
+    {{/code-snippet}}
+
+    <h4>Run the server:</h4>
+    {{#>code-snippet lang="bash"}}
+node server.js
+    {{/code-snippet}}
+
+    <h3>Client-side Implementation</h3>
+    <p>Now, create an HTML page to connect to the server and display the log updates as they stream in using SSE:</p>
+
+    {{#>code-snippet lang="html"}}
+&lt;h1&gt;Log Updates (Server-Sent Events)&lt;/h1&gt;
+&lt;pre id=&quot;log&quot;&gt;&lt;/pre&gt;
+&lt;script&gt;
+    const eventSource = new EventSource(&#39;http://localhost:3000/events&#39;);
+    eventSource.onmessage = function(event) {
+        document.getElementById(&#39;log&#39;).textContent += event.data + &#39;\n&#39;;
+    };
+    eventSource.onerror = function(error) {
+        console.error(&#39;SSE error:&#39;, error);
+    };
+&lt;/script&gt;
+    {{/code-snippet}}
+
+    <p>This script connects to the SSE endpoint and displays log updates in real time as they are sent from the server.</p>
+
+</section>
+
+
+<section>
+    <h2>Conclusion</h2>
+    <p>HTTP Streaming provides a powerful way to deliver real-time updates from server to client. Both chunked transfer encoding
+        and Server-Sent Events (SSE) are valid approaches for streaming data over HTTP, each with its own use cases. In this
+        guide, we demonstrated how to implement both methods, helping you understand the options available for real-time
+        data delivery.</p>
+</section>
+
+<section>
+    <h2>FAQ</h2>
+    <div class="faq vertical group start">
+        <details name="faq">
+            <summary>When should I use Server-Sent Events (SSE) over chunked transfer encoding?</summary>
+            <p>Use SSE when you need real-time updates or event streams, as it provides a more straightforward approach for one-way communication from the server to the client. SSE is especially useful for applications like notifications, live feeds, and logging. In contrast, chunked transfer encoding might be preferable for streaming larger data sets or when the structure of the data is not fixed.</p>
+        </details>
+        <details name="faq">
+            <summary>Are there any browser compatibility issues with Server-Sent Events (SSE)?</summary>
+            <p>Most modern browsers, including Chrome, Firefox, Safari, and Edge, support Server-Sent Events. However, older versions of Internet Explorer (prior to IE11) do not support SSE. If you need to support such browsers, you may have to consider fallback mechanisms like polling.</p>
+        </details>
+        <details name="faq">
+            <summary>What are the limitations of HTTP Streaming?</summary>
+            <p>While HTTP Streaming is effective for real-time updates, it may not be suitable for all applications. For example, if you need to send a single response or the data is static, traditional HTTP requests may be more efficient. Additionally, keeping connections open can consume server resources, so it's important to manage them effectively to avoid performance issues.</p>
+        </details>
+        <details name="faq">
+            <summary>How can I handle reconnections in Server-Sent Events (SSE)?</summary>
+            <p>SSE automatically attempts to reconnect if the connection is lost. You can manage reconnection behavior by setting a `retry` field in the stream, indicating how long (in milliseconds) the client should wait before trying to reconnect. For example, you can send `retry: 5000\n\n` from the server to instruct the client to wait 5 seconds before reconnecting.</p>
+        </details>
+        <details name="faq">
+            <summary>Is HTTP Streaming suitable for large file downloads?</summary>
+            <p>HTTP Streaming is not typically used for large file downloads, as it is designed for real-time data delivery rather than bulk data transfer. For large files, consider using standard HTTP downloads with appropriate headers to manage content delivery, or specialized protocols like FTP or HTTP/2 for improved performance.</p>
+        </details>
+        <details name="faq">
+            <summary>Can HTTP Streaming be combined with other technologies?</summary>
+            <p>Yes, HTTP Streaming can be combined with other technologies such as WebSockets for interactive applications, or even alongside REST APIs for fetching initial data. It’s common to use HTTP Streaming for real-time updates while maintaining traditional HTTP requests for other data interactions.</p>
+        </details>
+    </div>
+</section>

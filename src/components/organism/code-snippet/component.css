@@ -1,0 +1,58 @@
+/* General Styles */
+.code-snippet {
+    position: relative;
+    background-color: #2d2d2d;
+    border-radius: var(--border-radius-block);
+    padding: var(--spacing-xs);
+    margin: var(--spacing-l) 0;
+    color: var(--white-100);
+    font: var(--font-code-m), monospace;
+    box-shadow:var(--box-shadow-card-regular);
+    max-width: calc(100vw - 2 * var(--spacing-m));
+
+    /* Header */
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    /* Small tag for language name */
+
+    header small {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+    }
+
+    /* Copy Button */
+
+    .copy-btn {
+        color: var(--color-text-muted);
+        cursor: pointer;
+        font-size: var(--font-code-xs);
+        margin: 0;
+        border: none;
+    }
+
+    .copy-btn:hover {
+        background-color: var(--color-background-muted);
+    }
+
+    /* Highlight.js Styling */
+
+    pre {
+        padding: 0;
+        border-radius: var(--border-radius-block);
+        overflow-x: auto;
+        background: #272822;
+        border: none;
+        white-space: pre;
+    }
+
+    pre code {
+        padding: 0 var(--spacing-m);
+        text-wrap: nowrap;
+    }
+}

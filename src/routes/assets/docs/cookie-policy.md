@@ -23,15 +23,15 @@ We use cookies for various purposes, including:
 ## Cookies We Use
 
 Below is a list of the specific cookies we use on Majdibo.com:
-
-| Cookie Name    | Type              | Purpose                                      | Duration           |
-| -------------- | ----------------- | -------------------------------------------- | ------------------ |
-| `_ga`          | Performance       | Google Analytics - tracks user behavior      | 2 years            |
-| `_gid`         | Performance       | Google Analytics - tracks user behavior      | 24 hours           |
-| `_gat`         | Performance       | Google Analytics - throttles request rate    | 1 minute           |
-| `PHPSESSID`    | Essential         | Maintains session state across page requests | Session            |
-| `cookieConsent`| Functional        | Stores your cookie consent preferences       | 1 year             |
-
+| Cookie Name            | Type        | Purpose                                      | Duration |
+|------------------------|-------------|----------------------------------------------|----------|
+| `_ga`                  | Performance | Google Analytics - tracks user behavior      | 2 years  |
+| `_gid`                 | Performance | Google Analytics - tracks user behavior      | 24 hours |
+| `_gat`                 | Performance | Google Analytics - throttles request rate    | 1 minute |
+| `anonymousId`          | Functional  | Stores anonymous user ID                     | 1 year   |
+| `email`                | Functional  | Stores user email - useful to track engagement | 1 year   |
+| `username`             | Functional  | Stores username - to be displayed in conversation section | 1 year |
+| `wncCookieConsentMode` | Functional  | Stores cookie consent preferences            | 1 year   |
 ## Third-Party Cookies
 
 We may also use third-party services that place cookies on your device to assist with our advertising and analytics efforts. These services include, but are not limited to, Google Analytics and Google Ads. Please note that these third parties may have their own cookie policies which we do not control.

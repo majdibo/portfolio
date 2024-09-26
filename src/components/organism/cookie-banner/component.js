@@ -119,10 +119,8 @@ function needsCookieConsent() {
 
     // Check if the user's country is in the GDPR list
     if (gdprCountries.includes(userCountry)) {
-        console.log("Show cookie consent banner,", userCountry);
         return true;  // Needs consent
     } else {
-        console.log("No cookie consent required,", userCountry);
         return false;  // No consent required
     }
 }

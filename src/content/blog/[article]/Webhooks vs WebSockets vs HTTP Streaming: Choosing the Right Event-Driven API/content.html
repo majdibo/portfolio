@@ -29,7 +29,7 @@
     <p>Webhooks are like the friendly messenger of the API world. You tell the server what events you care about, and when those events happen, the server knocks on your door with the info. It’s as simple as registering a URL and letting the server send a POST request with all the event details.</p>
     <p><strong>Pros:</strong> They’re great for one-way notifications, easy to set up, and save you from constantly pinging the server.</p>
     <p><strong>Cons:</strong> You’re trusting the server to handle delivery, and publicly accessible URLs might introduce security concerns. Also, if you’re subscribed to a ton of events, things can get noisy fast.</p>
-    <p><strong>Use Case:</strong> Webhooks are perfect for services like SendGrid, where you need notifications on things like email bounces. You get a heads-up without constantly asking for updates.</p>
+    <p><strong>Use Case:</strong> Webhooks are ideal for receiving notifications about changes in user data, such as profile updates or long request handling, without the need for constant polling.</p>
 
     <h3>WebSockets</h3>
     <p>If you need two-way communication, WebSockets are your go-to. They create a persistent TCP connection between the server and client, allowing both to send and receive data at any time. This means real-time data exchange without the overhead of setting up multiple HTTP connections.</p>
@@ -42,6 +42,12 @@
     <p><strong>Pros:</strong> It’s built on HTTP, which means no special client setup, and it’s supported by most browsers out of the box.</p>
     <p><strong>Cons:</strong> The communication is one-way, so it’s not as interactive as WebSockets. Also, some clients might buffer the data, leading to delays in rendering updates.</p>
     <p><strong>Use Case:</strong> HTTP Streaming shines in live data feeds—like keeping track of real-time tweet updates from Twitter without refreshing the page.</p>
+    <p>I have a dedicated article about HTTP Streaming check it out : <a href="https://majdibo.com/blog/Understanding%20HTTP%20Streaming/" aria-label="Understanding HTTP Streaming" title="Understanding HTTP Streaming">Understanding HTTP Streaming</a></p>
+</section>
+
+<section>
+    <h2>Conclusion</h2>
+    <p>Choosing the right event-driven API can make or break your app’s real-time capabilities. Whether you need instant notifications, seamless communication, or continuous data feeds, Webhooks, WebSockets, and HTTP Streaming each offer unique advantages that can elevate your user experience.</p>
 </section>
 
 <section>

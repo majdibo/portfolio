@@ -1,4 +1,4 @@
-const  {copyAssets, ensureDirectoryExists} = require("./helpers");
+const  {copyAssets, ensureDirectoryExists, mergeDeep} = require("./helpers");
 const Handlebars = require("handlebars");
 const fs = require('fs');
 const path = require('path');
@@ -94,123 +94,134 @@ const logger = require('./logger');
 
 
     // Resolve content files (content.html, content.js, content.json)
-    async resolveContentFiles(contentDir, parentContext) {
-        let contentContext = {...parentContext};
-        const pageMetadata = contentContext.pageMetadata ? contentContext.pageMetadata : {
-            css: [],
-            js: [],
-            assetsPath: []
-        };
+     async resolveContentFiles(contentDir, parentContext) {
+         let contentContext = {...parentContext};
+         const pageMetadata = contentContext.pageMetadata ? contentContext.pageMetadata : {
+             css: [],
+             js: [],
+             assetsPath: []
+         };
 
-        // Process content.html
-        const contentHtmlPath = path.join(contentDir, 'content.html');
-        if (fs.existsSync(contentHtmlPath)) {
-            contentContext.content = fs.readFileSync(contentHtmlPath, 'utf-8');
-        }
+         // Process content.html
+         const contentHtmlPath = path.join(contentDir, 'content.html');
+         if (fs.existsSync(contentHtmlPath)) {
+             contentContext.content = fs.readFileSync(contentHtmlPath, 'utf-8');
+         }
 
-        // Process content.js
-        const contentJsPath = path.join(contentDir, 'content.js');
-        if (fs.existsSync(contentJsPath)) {
-            const contentScript = require(path.resolve(contentJsPath));
-            const functionNames = Object.keys(contentScript);
-            for (const functionName of functionNames) {
-                if (typeof contentScript[functionName] === 'function') {
-                    contentContext[functionName] = await contentScript[functionName](contentContext);
-                } else {
-                    contentContext = {...contentContext, ...contentScript[functionName]};
+         // Process content.js
+         const contentJsPath = path.join(contentDir, 'content.js');
+         if (fs.existsSync(contentJsPath)) {
+             const contentScript = require(path.resolve(contentJsPath));
+             const functionNames = Object.keys(contentScript);
+             for (const functionName of functionNames) {
+                 if (typeof contentScript[functionName] === 'function') {
+                     contentContext[functionName] = await contentScript[functionName](contentContext);
+                 } else {
+                     contentContext = {...contentContext, ...contentScript[functionName]};
+                 }
+             }
+         }
+
+         // Process content.json
+         const contentJsonPath = path.join(contentDir, 'content.json');
+         if (fs.existsSync(contentJsonPath)) {
+             const contentJson = JSON.parse(fs.readFileSync(contentJsonPath, 'utf-8'));
+             contentContext = {...contentContext, ...contentJson};
+         }
+
+         // Process assets
+         const contentAssetsPath = path.join(contentDir, 'assets');
+         if (this.isAssetDirectory(contentAssetsPath)) {
+             pageMetadata.assetsPath = [...pageMetadata.assetsPath, contentAssetsPath];
+             const assetFiles = fs.readdirSync(contentAssetsPath);
+             assetFiles.forEach(file => {
+                 const ext = path.extname(file);
+                 const assetPath = path.join("assets", file);
+                 if (ext === '.css') {
+                     pageMetadata.css.push({ path: assetPath, name: file, location: 'head', inline: false });
+                 } else if (ext === '.js') {
+                     pageMetadata.js.push({ path: assetPath, name: file, location: 'body', inline: false });
+                 }
+             });
+
+             if (contentContext.pageMetadata) {
+                 contentContext.pageMetadata = mergeDeep(pageMetadata, contentContext.pageMetadata);
+             } else {
+                 contentContext.pageMetadata = pageMetadata;
+             }
+         }
+
+         return contentContext;
+     }
+
+     // Handles resolving static routes by rendering index.html if present
+async resolveStaticRoute(routeDir, parentContext) {
+    const indexHtmlPath = path.join(routeDir, 'index.html');
+    const routeJsPath = path.join(routeDir, 'route.js');
+    let routeContext = {...parentContext};
+
+    if (fs.existsSync(routeJsPath)) {
+        const routeScript = require(path.resolve(routeJsPath));
+        const data = await routeScript.getData(routeContext, this);
+        routeContext = {...routeContext, ...data};
+    }
+
+    if (fs.existsSync(indexHtmlPath)) {
+        let content = fs.readFileSync(indexHtmlPath, 'utf-8');
+        let template = Handlebars.compile(content);
+        let renderedContent = template(routeContext);
+
+        // Recursively render until all partials are resolved
+        let previousContent;
+        const usedComponents = new Set();
+        do {
+            logger.debug('Checking for unresolved partials');
+            previousContent = renderedContent;
+            for (const name in Handlebars.partials) {
+                const partial = Handlebars.partials[name];
+                if (typeof partial === 'function') {
+                    usedComponents.add(name);
                 }
             }
-        }
 
-        // Process content.json
-        const contentJsonPath = path.join(contentDir, 'content.json');
-        if (fs.existsSync(contentJsonPath)) {
-            const contentJson = JSON.parse(fs.readFileSync(contentJsonPath, 'utf-8'));
-            contentContext = {...contentContext, ...contentJson};
-        }
+            template = Handlebars.compile(renderedContent);
+            renderedContent = template(routeContext);
+        } while (renderedContent !== previousContent);
 
-        // Process assets
-        const contentAssetsPath = path.join(contentDir, 'assets');
-        if (this.isAssetDirectory(contentAssetsPath)) {
-            pageMetadata.assetsPath = [...pageMetadata.assetsPath, contentAssetsPath];
-            const assetFiles = fs.readdirSync(contentAssetsPath);
-            assetFiles.forEach(file => {
-                const ext = path.extname(file);
-                if (ext === '.css') {
-                    pageMetadata.css.push(path.join("assets", file));
-                } else if (ext === '.js') {
-                    pageMetadata.js.push(path.join("assets", file));
-                }
+        // Inject CSS and JS for used components
+        for (const component of usedComponents) {
+            const componentCss = this.componentManager.metadata.css.find((componentCss) => {
+                return Object.keys(componentCss)[0] === component;
             });
 
-            contentContext.pageMetadata = pageMetadata;
+            const componentJs = this.componentManager.metadata.js.find((componentJs) => {
+                return Object.keys(componentJs)[0] === component;
+            });
+
+            if (componentCss) {
+                renderedContent = renderedContent.replace('</head>', `<link rel="stylesheet" href="${componentCss[component]}">` + '\n</head>');
+            }
+
+            if (componentJs) {
+                renderedContent = renderedContent.replace('</body>', `<script src="${componentJs[component]}"></script>` + '\n</body>');
+            }
         }
 
-        return contentContext;
+        const renderRoutePath = routeDir.replace(this.baseDir, '').replace(/\[.*?]/g, match => routeContext[match.slice(1, -1)]);
+        this.writeToOutput(renderRoutePath, renderedContent, routeContext);
+
+        const assetsPath = routeContext.pageMetadata?.assetsPath;
+
+        if (assetsPath) {
+            const destPath = path.join(this.outputDir, renderRoutePath, 'assets');
+            assetsPath.forEach((assetsPath) => {
+                copyAssets(assetsPath, destPath);
+            });
+        }
     }
 
-    // Handles resolving static routes by rendering index.html if present
-    async resolveStaticRoute(routeDir, parentContext) {
-        const indexHtmlPath = path.join(routeDir, 'index.html');
-        const routeJsPath = path.join(routeDir, 'route.js');
-        let routeContext = {...parentContext};
-
-        if (fs.existsSync(routeJsPath)) {
-            const routeScript = require(path.resolve(routeJsPath));
-            const data = await routeScript.getData(routeContext, this);
-            routeContext = {...routeContext, ...data};
-        }
-
-        if (fs.existsSync(indexHtmlPath)) {
-            const content = fs.readFileSync(indexHtmlPath, 'utf-8');
-            const template = Handlebars.compile(content);
-            let renderedContent = template(routeContext);
-
-            const usedComponents = []
-            for (const name in Handlebars.partials) {
-                const partial = Handlebars.partials[name]
-                if (typeof partial === 'function') {
-                    usedComponents.push(name)
-                }
-            }
-
-            // get only used components from component manager metadata css and js, then add them to rendered content by including them in the head and body
-            for (const component of usedComponents) {
-
-                const componentCss = this.componentManager.metadata.css.find((componentCss) => {
-                    return Object.keys(componentCss)[0] === component;
-                });
-
-                const componentJs = this.componentManager.metadata.js.find((componentJs) => {
-                    return Object.keys(componentJs)[0] === component;
-                });
-
-                if (componentCss) {
-                    renderedContent = renderedContent.replace('</head>', `<link rel="stylesheet" href="${componentCss[component]}">` + '\n</head>');
-                }
-
-                if (componentJs) {
-                    renderedContent = renderedContent.replace('</body>', `<script src="${componentJs[component]}"></script>` + '\n</body>');
-                }
-            }
-
-            const renderRoutePath = routeDir.replace(this.baseDir, '').replace(/\[.*?]/g, match => routeContext[match.slice(1, -1)]);
-            this.writeToOutput(renderRoutePath, renderedContent, routeContext);
-
-            const assetsPath = routeContext.pageMetadata?.assetsPath;
-
-            if (assetsPath) {
-                const destPath = path.join(this.outputDir, renderRoutePath, 'assets');
-                assetsPath.forEach((assetsPath) => {
-                    copyAssets(assetsPath, destPath);
-                });
-            }
-        }
-
-        return routeContext;
-    }
-
-    // Handle dynamic routes by looping through dynamic items
+    return routeContext;
+}    // Handle dynamic routes by looping through dynamic items
     async resolveDynamicItems(items, dynamicRouteName, currentDir, parentContext) {
         for (const item of items) {
             logger.info(`Resolving dynamic item: ${item}`);
@@ -226,7 +237,7 @@ const logger = require('./logger');
         }
     }
 
-    writeToOutput( routePath, content, context) {
+     writeToOutput(routePath, content, context) {
          const pageMetadata = context.pageMetadata;
 
          const fullOutputPath = path.join(this.outputDir, routePath, 'index.html');
@@ -235,24 +246,43 @@ const logger = require('./logger');
          if (pageMetadata) {
              // Include CSS in the head
              const cssLinks = pageMetadata.css
-                 .map(cssPath => {
-                     return cssPath.replace(this.baseDir, '').replace(/\[.*?]/g, match => context[match.slice(1, -1)]);
-                 })
-                 .map(cssPath => `<link rel="stylesheet" href="${cssPath}">`).join('\n');
+                 .filter(css => css.location === 'head')
+                 .map(css => css.inline
+                     ? `<style>${css.content || fs.readFileSync(css.path, 'utf-8')}</style>`
+                     : `<link rel="stylesheet" href="${css.path}">`)
+                 .join('\n');
              content = content.replace('</head>', `${cssLinks}\n</head>`);
 
-             // Include JS at the bottom of the body
-             const jsScripts = pageMetadata.js
-                 .map(jsPath => {
-                     return jsPath.replace(this.baseDir, '').replace(/\[.*?]/g, match => context[match.slice(1, -1)]);
-                 })
-                 .map(jsPath => `<script src="${jsPath}"></script>`).join('\n');
-             content = content.replace('</body>', `${jsScripts}\n</body>`);
+             // Include JS in the head
+             const jsHeadScripts = pageMetadata.js
+                 .filter(js => js.location === 'head')
+                 .map(js => js.inline
+                     ? `<script>${js.content || fs.readFileSync(js.path, 'utf-8')}</script>`
+                     : `<script src="${js.path}"></script>`)
+                 .join('\n');
+             content = content.replace('</head>', `${jsHeadScripts}\n</head>`);
+
+             // Include CSS in the body
+             const cssBodyLinks = pageMetadata.css
+                 .filter(css => css.location === 'body')
+                 .map(css => css.inline
+                     ? `<style>${css.content || fs.readFileSync(css.path, 'utf-8')}</style>`
+                     : `<link rel="stylesheet" href="${css.path}">`)
+                 .join('\n');
+             content = content.replace('</body>', `${cssBodyLinks}\n</body>`);
+
+             // Include JS in the body
+             const jsBodyScripts = pageMetadata.js
+                 .filter(js => js.location === 'body')
+                 .map(js => js.inline
+                     ? `<script>${js.content || fs.readFileSync(js.path, 'utf-8')}</script>`
+                     : `<script src="${js.path}"></script>`)
+                 .join('\n');
+             content = content.replace('</body>', `${jsBodyScripts}\n</body>`);
          }
 
          fs.writeFileSync(fullOutputPath, content, 'utf-8');
          logger.debug(`Content written to: ${fullOutputPath}`);
-     }
-}
+     }}
 
 module.exports = {RouteManager};

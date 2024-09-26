@@ -4,7 +4,7 @@
     <main>
         <div>
             <h1>Hello 👋 , I'm Majdi <span class="light">Ben Ouaghrem</span>.</h1>
-            <span class="divider accent"><i class="fa-regular fa-circle"></i></span>
+            <div class="divider">{{>logo}}</div>
             <h2 class="flex center wrap align-center">
                 <span>Crafting</span>
                 <span class="animation fast fg-default m-1">
@@ -98,7 +98,7 @@
             </p>
         </section>
         <section>
-            <span class="vertical divider height smaller accent"><i class="fa-regular fa-circle"></i></span>
+            <span class="vertical divider height smaller">{{>logo}}</span>
         </section>
         <section class="col-span-3 card">
             <h3>Solution Architect</h3>
@@ -120,18 +120,18 @@
     <h2 class="divider">Blogs</h2>
 
     <section class="scroll  horizontal">
-        <article class="clickable">
-            <img src="{{featuredArticle.img}}" alt="{{featuredArticle.title}}">
+        <article >
+            <a href="{{featuredArticle.link}}"><img src="{{featuredArticle.img}}" alt="{{featuredArticle.title}}"></a>
             <header>
-                <a href="{{featuredArticle.link}}">{{featuredArticle.title}}</a>
-                <h1> {{featuredArticle.title}}</h1>
-                <p>
+                <h1>  <a href="{{featuredArticle.link}}">{{featuredArticle.title}}</a></h1>
+
+                <p class="tags">
                     {{#each featuredArticle.tags}}
-                    <small class="bg-accent p-.5 mr-.5">{{this}} </small>
+                    <small class="bg-accent p-.5">{{this}} </small>
                     {{/each}}
                 </p>
             </header>
-            <p>{{featuredArticle.description}}</p>
+            <p>{{{featuredArticle.description}}}</p>
             <footer>
                 <p>{{featuredArticle.readingTime}} min read</p>
             </footer>
@@ -139,18 +139,17 @@
 
         {{#if articles}}
         {{#each articles}}
-        <article class="clickable">
-            <img src="{{img}}" alt="{{title}}">
+        <article >
+            <a href="{{link}}"><img src="{{img}}" alt="{{title}}"></a>
             <header>
-                <a href="{{link}}">{{title}}</a>
-                <h1> {{title}}</h1>
-                <p>
+                <h1>   <a href="{{link}}">{{title}}</a></h1>
+                <p class="tags">
                     {{#each tags}}
-                    <small class="bg-accent p-.5 mr-.5">{{this}} </small>
+                    <small class="bg-accent p-.5">{{this}} </small>
                     {{/each}}
                 </p>
             </header>
-            <p>{{description}}</p>
+            <p>{{{description}}}</p>
             <footer>
                 <p>{{readingTime}} min read</p>
             </footer>
