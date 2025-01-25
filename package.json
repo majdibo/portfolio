@@ -6,7 +6,8 @@
     "dev": "nodemon  --watch src/ generator/main.js"
   },
     "devDependencies": {
-        "nodemon": "^3.1.7"
+        "nodemon": "^3.1.7",
+        "http-server": "^14.1.1"
     },
   "dependencies": {
     "handlebars": "^4.7.8"
